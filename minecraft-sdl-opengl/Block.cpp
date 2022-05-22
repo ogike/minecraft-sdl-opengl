@@ -16,7 +16,7 @@ void Block::AddToMesh(ChunkMesh& mesh) const
 		glm::vec3(0, 0, 1), //normal
 		glm::vec2(0, 0) //tex
 	);
-
+	
 	//back
 	mesh.addFace(
 		origPos,
@@ -27,7 +27,7 @@ void Block::AddToMesh(ChunkMesh& mesh) const
 		glm::vec3(0, 0, -1), //normal
 		glm::vec2(0, 0) //tex
 	);
-
+	
 	//right
 	mesh.addFace(
 		origPos,
@@ -71,5 +71,5 @@ void Block::AddToMesh(ChunkMesh& mesh) const
 		glm::vec3(0, -1, 0), //normal
 		glm::vec2(0, 0) //tex
 	);
-
+	
 }

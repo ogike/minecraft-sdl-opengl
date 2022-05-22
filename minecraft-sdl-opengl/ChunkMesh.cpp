@@ -1,10 +1,7 @@
 #include "ChunkMesh.h"
 
-#include "ChunkMesh.h"
 
-ChunkMesh::ChunkMesh(void)
-{
-}
+
 
 ChunkMesh::~ChunkMesh(void)
 {
@@ -52,7 +49,7 @@ void ChunkMesh::initBuffers()
 	inited = true;
 }
 
-void ChunkMesh::addFace(glm::vec3 origoPos, glm::vec3 facePosBtmLeft, glm::vec3 facePosBtmRight, glm::vec3 facePosTopLeft, glm::vec3 facePosTopRight, glm::vec3 normal, glm::vec2 texPos)
+void ChunkMesh::addFace(glm::vec3 origoPos, glm::vec3 facePosTopLeft, glm::vec3 facePosTopRight, glm::vec3 facePosBtmLeft, glm::vec3 facePosBtmRight, glm::vec3 normal, glm::vec2 texPos)
 {
 	//struct Vertex{ glm::vec3 position; glm::vec3 normals; glm::vec2 texture; };
 	//TODO: texPos from atlas
@@ -61,7 +58,7 @@ void ChunkMesh::addFace(glm::vec3 origoPos, glm::vec3 facePosBtmLeft, glm::vec3 
 	vertices.push_back({ origoPos + facePosBtmLeft, normal, glm::vec2(0, 1) });
 	vertices.push_back({ origoPos + facePosBtmRight, normal, glm::vec2(1, 1) });
 
-	int startingInd = indices.size();
+	int startingInd = vertices.size();
 
 	// upper triangle
 	indices.push_back( startingInd + 0 );
@@ -71,6 +68,7 @@ void ChunkMesh::addFace(glm::vec3 origoPos, glm::vec3 facePosBtmLeft, glm::vec3 
 	indices.push_back( startingInd + 1 );
 	indices.push_back( startingInd + 3 );
 	indices.push_back( startingInd + 2 );
+
 }
 
 void ChunkMesh::draw()

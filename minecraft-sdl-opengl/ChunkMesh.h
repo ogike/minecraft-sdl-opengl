@@ -19,15 +19,15 @@ public:
 		glm::vec2 texcoord;
 	};
 
-	ChunkMesh(void);
+	ChunkMesh(void) : vertices(), indices() {}
 	~ChunkMesh(void);
 
 	void initBuffers();
 	void draw();
 
 	void addFace(glm::vec3 origoPos, 
-		glm::vec3 facePosBtmLeft, glm::vec3 facePosBtmRight, 
 		glm::vec3 facePosTopLeft, glm::vec3 facePosTopRight, 
+		glm::vec3 facePosBtmLeft, glm::vec3 facePosBtmRight, 
 		glm::vec3 normal, glm::vec2 texPos);
 
 	/*void addVertex(const Vertex& vertex) {
