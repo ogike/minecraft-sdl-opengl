@@ -194,6 +194,13 @@ void CMyApp::InitShaders()
 			{ 0, "vs_in_pos" },				// VAO 0-as csatorna menjen a vs_in_pos-ba
 		}
 	);
+
+	m_programAxis.Init(
+		{
+			{ GL_VERTEX_SHADER, "axis.vert" },
+			{ GL_FRAGMENT_SHADER, "axis.frag" }
+		}
+	);
 }
 
 bool CMyApp::Init()
@@ -208,13 +215,15 @@ bool CMyApp::Init()
 	InitCube();
 	InitSkyBox();
 
+	m_world.GenerateTerrain();
+
 	// egyéb textúrák betöltése
 	m_woodTexture.FromFile("assets/wood.jpg");
 	m_suzanneTexture.FromFile("assets/marron.jpg");
 
 	// mesh betöltése
-	m_mesh = std::unique_ptr<Mesh>(ObjParser::parse("assets/Suzanne.obj"));
-	m_mesh->initBuffers();
+	//m_mesh = std::unique_ptr<Mesh>(ObjParser::parse("assets/Suzanne.obj"));
+	//m_mesh->initBuffers();
 	
 	// kamera
 	m_camera.SetProj(glm::radians(60.0f), 640.0f / 480.0f, 0.01f, 1000.0f);
@@ -250,7 +259,11 @@ void CMyApp::Render()
 	m_program.SetUniform("MVP", viewProj * suzanneWorld);
 	m_program.SetUniform("world", suzanneWorld);
 	m_program.SetUniform("worldIT", glm::inverse(glm::transpose(suzanneWorld)));
-	m_mesh->draw();
+	//m_mesh->draw();
+
+	//Terrain ///////////////////////////////////////////
+	m_world.Draw();
+
 
 	// kockák
 	//m_program.Use(); nem hívjuk meg újra, hisz ugyanazt a shadert használják
@@ -302,6 +315,10 @@ void CMyApp::Render()
 
 	//ImGui Testwindow
 	ImGui::ShowTestWindow();
+
+	m_programAxis.Use();
+	m_programAxis.SetUniform("MVP", m_camera.GetViewProj());
+	glDrawArrays(GL_LINES, 0, 6); //többi vertex shaderen belül
 }
 
 void CMyApp::KeyboardDown(SDL_KeyboardEvent& key)

@@ -25,6 +25,9 @@
 // mesh
 #include "includes/ObjParser_OGL3.h"
 
+// terrain
+#include "World.h"
+
 class CMyApp
 {
 public:
@@ -49,19 +52,23 @@ protected:
 	// shaderekhez szükséges változók
 	ProgramObject		m_program;			// mesh shader
 	ProgramObject		m_programSkybox;	// skybox shader
+	ProgramObject		m_programAxis;		//coordinate axis
 
 	VertexArrayObject	m_CubeVao;			// VAO
 	IndexBuffer			m_CubeIndices;		// index buffer
 	ArrayBuffer			m_CubeVertexBuffer;	// VBO
 	VertexArrayObject	m_SkyboxVao;
 	IndexBuffer			m_SkyboxIndices;	
-	ArrayBuffer			m_SkyboxPos;		
+	ArrayBuffer			m_SkyboxPos;	
+
 
 	gCamera				m_camera;
 
 	Texture2D			m_woodTexture;
 	Texture2D			m_suzanneTexture;
 	TextureCubeMap		m_skyboxTexture;
+
+	World				m_world;
 
 	struct Vertex
 	{

@@ -87,6 +87,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Block.h" />
+    <ClInclude Include="Chunk.h" />
+    <ClInclude Include="ChunkMesh.h" />
     <ClInclude Include="Includes\BufferObject.h" />
     <ClInclude Include="Includes\gCamera.h" />
     <ClInclude Include="Includes\GLconversions.hpp" />
@@ -99,12 +102,19 @@
     <ClInclude Include="Includes\TextureObject.h" />
     <ClInclude Include="Includes\VertexArrayObject.h" />
     <ClInclude Include="MyApp.h" />
+    <ClInclude Include="BlockPosition.h" />
+    <ClInclude Include="ChunkPosition.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="T:\OGLPack\include\imgui\imconfig.h" />
     <ClInclude Include="T:\OGLPack\include\imgui\imgui.h" />
     <ClInclude Include="T:\OGLPack\include\imgui\imgui_impl_sdl_gl3.h" />
     <ClInclude Include="T:\OGLPack\include\imgui\imgui_internal.h" />
+    <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Block.cpp" />
+    <ClCompile Include="Chunk.cpp" />
+    <ClCompile Include="ChunkMesh.cpp" />
     <ClCompile Include="Includes\gCamera.cpp" />
     <ClCompile Include="Includes\GLconversions.cpp" />
     <ClCompile Include="Includes\GLDebugMessageCallback.cpp" />
@@ -115,6 +125,9 @@
     <ClCompile Include="Includes\VertexArrayObject.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MyApp.cpp" />
+    <ClCompile Include="World.cpp" />
+    <None Include="axis.frag" />
+    <None Include="axis.vert" />
     <None Include="Includes\BufferObject.inl" />
     <None Include="Includes\ProgramObject.inl" />
     <None Include="Includes\TextureObject.inl" />
@@ -129,6 +142,9 @@
   <ItemGroup>
     <None Include="myFrag.frag" />
     <None Include="myVert.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="minecraft-sdl-opengl.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
