@@ -251,38 +251,18 @@ void CMyApp::Render()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glm::mat4 viewProj = m_camera.GetViewProj();
+	glm::mat4 origoWorld = glm::mat4(1.0f);
 
-	//Suzanne
-	glm::mat4 suzanneWorld = glm::mat4(1.0f);
+	//Terrain
 	m_program.Use();
 	m_program.SetTexture("texImage", 0, m_suzanneTexture);
-	m_program.SetUniform("MVP", viewProj * suzanneWorld);
-	m_program.SetUniform("world", suzanneWorld);
-	m_program.SetUniform("worldIT", glm::inverse(glm::transpose(suzanneWorld)));
-	//m_mesh->draw();
+	m_program.SetUniform("MVP", viewProj * origoWorld);
+	m_program.SetUniform("world", origoWorld);
+	m_program.SetUniform("worldIT", glm::inverse(glm::transpose(origoWorld)));
 
 	//Terrain ///////////////////////////////////////////
 	m_world.Draw();
 
-
-	// kockák
-	//m_program.Use(); nem hívjuk meg újra, hisz ugyanazt a shadert használják
-	m_CubeVao.Bind();
-	m_program.SetTexture("texImage", 0, m_woodTexture);
-	glm::mat4 cubeWorld;
-
-	float time = SDL_GetTicks() / 1000.0f * 2 * float(M_PI) / 10;
-	for (int i = 0; i < 10; ++i)
-	{
-		cubeWorld =
-			glm::rotate(time + 2 * glm::pi<float>() / 10 * i, glm::vec3(0, 1, 0))*
-			glm::translate(glm::vec3(10 + 5 * sin(time), 0, 0))*
-			glm::rotate((i + 1)*time, glm::vec3(0, 1, 0));
-		m_program.SetUniform("MVP", viewProj * cubeWorld);
-		m_program.SetUniform("world", cubeWorld);
-		m_program.SetUniform("worldIT", glm::inverse(glm::transpose(cubeWorld)));
-		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, nullptr);
-	}
 	m_program.Unuse();
 
 	// skybox
@@ -309,9 +289,6 @@ void CMyApp::Render()
 	// végül állítsuk vissza
 	glDepthFunc(prevDepthFnc);
 
-
-	// 1. feladat: készíts egy vertex shader-fragment shader párt, ami tárolt geometria _nélkül_ kirajzol egy tetszőleges pozícióba egy XYZ tengely-hármast,
-	//			   ahol az X piros, az Y zöld a Z pedig kék!
 
 	//ImGui Testwindow
 	ImGui::ShowTestWindow();

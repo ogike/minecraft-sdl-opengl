@@ -5,6 +5,8 @@
 #include <vector>
 #include <glm/glm.hpp>
 
+#include <iostream>
+
 
 /// <summary>
 /// Copied most of this from GLUtils/Mesh_OGL3
@@ -19,7 +21,8 @@ public:
 		glm::vec2 texcoord;
 	};
 
-	ChunkMesh(void) : vertices(), indices() {}
+	ChunkMesh(void) : vertices(), indices(), 
+		vertexArrayObject(), vertexBuffer(), indexBuffer() {}
 	~ChunkMesh(void);
 
 	void initBuffers();

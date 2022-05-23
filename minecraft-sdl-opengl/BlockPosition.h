@@ -29,6 +29,13 @@ public:
 		return false;
 	}
 
+	BlockPosition ToFront()  const { return BlockPosition(_x,     _y,     _z + 1); }
+	BlockPosition ToBack()   const { return BlockPosition(_x,     _y,     _z - 1); }
+	BlockPosition ToRight()  const { return BlockPosition(_x + 1, _y,     _z    ); }
+	BlockPosition ToLeft()   const { return BlockPosition(_x - 1, _y,     _z    ); }
+	BlockPosition ToTop()    const { return BlockPosition(_x,     _y + 1, _z    ); }
+	BlockPosition ToBottom() const { return BlockPosition(_x ,    _y - 1, _z    ); }
+
 private:
 	int _x;
 	int _y;

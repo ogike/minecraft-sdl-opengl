@@ -69,13 +69,18 @@ void ChunkMesh::addFace(glm::vec3 origoPos, glm::vec3 facePosTopLeft, glm::vec3 
 	indices.push_back( startingInd + 3 );
 	indices.push_back( startingInd + 2 );
 
+	/*static int numOfFaces = 0;
+	std::cout << "at step <" << numOfFaces
+		<< "> the num of vertices is: " << startingInd
+		<< ", num of indices is: " << indices.size() << std::endl;
+	numOfFaces++;*/
 }
 
 void ChunkMesh::draw()
 {
 	glBindVertexArray(vertexArrayObject);
 
-	glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
+	glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, nullptr);
 
 	glBindVertexArray(0);
 }

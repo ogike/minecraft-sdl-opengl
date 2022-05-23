@@ -19,6 +19,9 @@ public:
 	void BuildMesh();
 	void draw() { myMesh.draw(); }
 
+	Block::NeighbourCollision CheckNeighbours(Block* block);
+	bool IsSolidAt(BlockPosition pos);
+
 	const ChunkPosition myChunkPos;
 
 private:
