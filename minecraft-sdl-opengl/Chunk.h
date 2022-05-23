@@ -1,15 +1,18 @@
 #pragma once
 
 #include "BlockPosition.h"
-#include "BlockPosition.h"
+#include "ChunkPosition.h"
 #include "Block.h"
 #include "ChunkMesh.h"
+#include "World.h"
 #include <map>
+
+class World;
 
 class Chunk
 {
 public:
-	Chunk(ChunkPosition pos) : myChunkPos(pos) {}
+	Chunk(ChunkPosition pos, World* world) : myChunkPos(pos), myWorld(world) {}
 
 	//world or in-chunk pos?
 	void AddBlock(Block * block, BlockPosition pos) {
@@ -28,6 +31,6 @@ private:
 
 	std::map<BlockPosition, Block*> blocks;
 	ChunkMesh myMesh;
-
+	World* myWorld;
 };
 

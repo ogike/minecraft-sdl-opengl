@@ -11,8 +11,12 @@ public:
 	int GetY() const { return _y; }
 	int GetZ() const { return _z; }
 
-	glm::vec3 GetAbsolutePos(ChunkPosition chunkPos) {
-		return glm::vec3(16 * chunkPos.GetX() + _x, _y, 16 * chunkPos.GetZ() + _z);
+	glm::vec3 GetGlobalPos(ChunkPosition chunkPos) const {
+		return glm::vec3(
+			16 * chunkPos.GetX() + _x + 0.5f,
+			_y + 0.5f,
+			16 * chunkPos.GetZ() + _z + 0.5f
+		);
 	}
 
 	//for correct use as std::map keys

@@ -4,7 +4,7 @@ void Block::AddToMesh(ChunkMesh& mesh, NeighbourCollision colls) const
 {
 	//TODO: air checks
 
-	glm::vec3 origPos = glm::vec3(blockPos.GetX(), blockPos.GetY(), blockPos.GetZ());
+	glm::vec3 origPos = blockPos.GetGlobalPos(chunkPos);
 
 	//front
 	if(!colls.front)

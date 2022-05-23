@@ -1,7 +1,7 @@
 #pragma once
 
 #include "BlockPosition.h"
-#include "BlockPosition.h"
+#include "ChunkPosition.h"
 #include "ChunkMesh.h"
 
 enum class BlockType { Air, Dirt, Stone };
@@ -14,8 +14,8 @@ public:
 		bool front, back, right, left, top, bottom;
 	};
 
-	Block(BlockType type, BlockPosition blockPos):
-		type(type), blockPos(blockPos) {}
+	Block(BlockType type, BlockPosition blockPos, ChunkPosition chunkPos):
+		type(type), blockPos(blockPos), chunkPos(chunkPos) {}
 	
 	BlockType type;
 
@@ -24,9 +24,7 @@ public:
 	void AddToMesh(ChunkMesh& mesh, NeighbourCollision colls) const;
 
 	const BlockPosition blockPos;
-
-private:
-	//const ChunkPosition chunkPos;
+	const ChunkPosition chunkPos;
 
 
 };
