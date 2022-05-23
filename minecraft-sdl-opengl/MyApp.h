@@ -66,6 +66,7 @@ protected:
 
 	Texture2D			m_woodTexture;
 	Texture2D			m_suzanneTexture;
+	Texture2D			m_textureAtlas;
 	TextureCubeMap		m_skyboxTexture;
 
 	World				m_world;

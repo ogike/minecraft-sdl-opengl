@@ -220,6 +220,7 @@ bool CMyApp::Init()
 	// egyéb textúrák betöltése
 	m_woodTexture.FromFile("assets/wood.jpg");
 	m_suzanneTexture.FromFile("assets/marron.jpg");
+	m_textureAtlas.FromFile("assets/atlas.png");
 
 	// mesh betöltése
 	//m_mesh = std::unique_ptr<Mesh>(ObjParser::parse("assets/Suzanne.obj"));
@@ -255,7 +256,7 @@ void CMyApp::Render()
 
 	//Terrain
 	m_program.Use();
-	m_program.SetTexture("texImage", 0, m_suzanneTexture);
+	m_program.SetTexture("texImage", 0, m_textureAtlas);
 	m_program.SetUniform("MVP", viewProj * origoWorld);
 	m_program.SetUniform("world", origoWorld);
 	m_program.SetUniform("worldIT", glm::inverse(glm::transpose(origoWorld)));

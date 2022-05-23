@@ -1,9 +1,8 @@
 #include "Block.h"
 
+
 void Block::AddToMesh(ChunkMesh& mesh, NeighbourCollision colls) const
 {
-	//TODO: air checks
-
 	glm::vec3 origPos = blockPos.GetGlobalPos(chunkPos);
 
 	//front
@@ -15,7 +14,7 @@ void Block::AddToMesh(ChunkMesh& mesh, NeighbourCollision colls) const
 			glm::vec3(-0.5, +0.5, +0.5),
 			glm::vec3(+0.5, +0.5, +0.5),
 			glm::vec3(0, 0, 1), //normal
-			glm::vec2(0, 0) //tex
+			sideTexPos //tex
 		);
 	
 	//back
@@ -27,7 +26,7 @@ void Block::AddToMesh(ChunkMesh& mesh, NeighbourCollision colls) const
 			glm::vec3(+0.5, +0.5, -0.5),
 			glm::vec3(-0.5, +0.5, -0.5),
 			glm::vec3(0, 0, -1), //normal
-			glm::vec2(0, 0) //tex
+			sideTexPos //tex
 		);
 	
 	//right
@@ -39,7 +38,7 @@ void Block::AddToMesh(ChunkMesh& mesh, NeighbourCollision colls) const
 			glm::vec3(+0.5, +0.5, +0.5),
 			glm::vec3(+0.5, +0.5, -0.5),
 			glm::vec3(1, 0, 0), //normal
-			glm::vec2(0, 0) //tex
+			sideTexPos //tex
 		);
 
 	//left
@@ -51,7 +50,7 @@ void Block::AddToMesh(ChunkMesh& mesh, NeighbourCollision colls) const
 			glm::vec3(-0.5, +0.5, -0.5),
 			glm::vec3(-0.5, +0.5, +0.5),
 			glm::vec3(-1, 0, 0), //normal
-			glm::vec2(0, 0) //tex
+			sideTexPos //tex
 		);
 
 	//top
@@ -63,7 +62,7 @@ void Block::AddToMesh(ChunkMesh& mesh, NeighbourCollision colls) const
 			glm::vec3(-0.5, +0.5, -0.5),
 			glm::vec3(+0.5, +0.5, -0.5),
 			glm::vec3(0, 1, 0), //normal
-			glm::vec2(0, 0) //tex
+			topTexPos //tex
 		);
 
 	//bottom
@@ -75,7 +74,32 @@ void Block::AddToMesh(ChunkMesh& mesh, NeighbourCollision colls) const
 			glm::vec3(-0.5, -0.5, +0.5),
 			glm::vec3(+0.5, -0.5, +0.5),
 			glm::vec3(0, -1, 0), //normal
-			glm::vec2(0, 0) //tex
+			bottomTexPos //tex
 		);
 	
+}
+
+void Block::SetTextures()
+{
+
+	switch (type)
+	{
+		case BlockType::Dirt:
+
+			topTexPos = glm::vec2(0, 0);;
+			sideTexPos = glm::vec2(2 * TEX_SIZE, 0);
+			bottomTexPos = glm::vec2(3 * TEX_SIZE, 0);
+			break;
+		case BlockType::Stone:
+			topTexPos = glm::vec2(1 * TEX_SIZE, 0);
+			sideTexPos = topTexPos;
+			bottomTexPos = topTexPos;
+			break;
+		default: //invalid texture
+			topTexPos = glm::vec2(6 * TEX_SIZE, 2 * TEX_SIZE);
+			sideTexPos = topTexPos;
+			bottomTexPos = topTexPos;
+			break;
+	}
+	//topRight = topLeft +
 }
