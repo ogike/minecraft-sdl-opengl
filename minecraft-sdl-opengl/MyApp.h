@@ -28,6 +28,8 @@
 // terrain
 #include "World.h"
 
+#include "Constants.h"
+
 class CMyApp
 {
 public:

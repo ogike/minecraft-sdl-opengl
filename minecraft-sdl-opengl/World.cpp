@@ -17,9 +17,9 @@ void World::GenerateTerrain()
 	FastNoiseLite noise;
 	noise.SetNoiseType(FastNoiseLite::NoiseType_Perlin);
 
-	for (int x = -WORLD_SIZE_CHUNKS/2; x < WORLD_SIZE_CHUNKS/2; x++)
+	for (int x = -WORLD_SIZE_CHUNKS/2; x <= WORLD_SIZE_CHUNKS/2; x++)
 	{
-		for (int z = -WORLD_SIZE_CHUNKS / 2; z < WORLD_SIZE_CHUNKS / 2; z++)
+		for (int z = -WORLD_SIZE_CHUNKS / 2; z <= WORLD_SIZE_CHUNKS / 2; z++)
 		{
 			GeneratePerlinChunk(ChunkPosition(x, z), noise);
 		}

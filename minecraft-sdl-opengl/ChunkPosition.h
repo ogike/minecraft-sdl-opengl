@@ -21,6 +21,10 @@ public:
 		return false;
 	}
 
+	bool operator==(const ChunkPosition& pos) const {
+		return pos._x == _x && pos._z == _z;
+	}
+
 	glm::vec3 getGlobalPos() {
 		return glm::vec3( _x * CHUNK_SIZE, 0, _z * CHUNK_SIZE);
 	}
