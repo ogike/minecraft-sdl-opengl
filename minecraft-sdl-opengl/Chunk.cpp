@@ -14,6 +14,8 @@ Block::NeighbourCollision Chunk::CheckNeighbours(Block* block)
 {
 	Block::NeighbourCollision colls{};
 
+	
+
 	colls.front = IsSolidAt(block->blockPos.ToFront());
 
 	colls.back  = IsSolidAt(block->blockPos.ToBack());
@@ -38,14 +40,14 @@ bool Chunk::IsSolidAt(BlockPosition pos)
 	if (pos.GetX() < 0) {
 		Chunk* toLeftChunk = myWorld->getChunkAt( myChunkPos.ToLeft() );
 		if (toLeftChunk == nullptr) return false;
-		return toLeftChunk->IsSolidAt( BlockPosition(CHUNK_SIZE - 1, pos.GetY(), pos.GetY()) );
+		return toLeftChunk->IsSolidAt( BlockPosition(CHUNK_SIZE - 1, pos.GetY(), pos.GetZ()) );
 	}
 
 	//Block is in the chunk to the right
 	if (pos.GetX() >= CHUNK_SIZE) {
 		Chunk* toRightChunk = myWorld->getChunkAt(myChunkPos.ToRight());
 		if(toRightChunk == nullptr) return false;
-		return toRightChunk->IsSolidAt(BlockPosition(0, pos.GetY(), pos.GetY()));
+		return toRightChunk->IsSolidAt(BlockPosition(0, pos.GetY(), pos.GetZ()));
 	}
 
 	//Block is in the chunk to the back
