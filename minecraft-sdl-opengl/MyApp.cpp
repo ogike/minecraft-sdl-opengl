@@ -294,9 +294,40 @@ void CMyApp::Render()
 	//ImGui Testwindow
 	//ImGui::ShowTestWindow();
 
+
 	m_programAxis.Use();
 	m_programAxis.SetUniform("MVP", m_camera.GetViewProj());
 	glDrawArrays(GL_LINES, 0, 6); //többi vertex shaderen belül
+	m_programAxis.Unuse();
+
+	//Debug window
+	if (ImGui::Begin("Debug window")) {
+		glm::vec3 cam_eye = m_camera.GetEye();
+		glm::vec3 cam_at  = m_camera.GetAt();
+		glm::vec3 cam_up  = m_camera.GetUp();
+
+		ImGui::Text("Camera positions:");
+		ImGui::Text("Global position:\n x: %f,\n y: %f,\n z: %f", cam_eye.x, cam_eye.y, cam_eye.z);
+		ImGui::Text("Looking at:\n x: %f,\n y: %f,\n z: %f", cam_at.x, cam_at.y, cam_at.z);
+		ImGui::Text("Up direction:\n x: %f,\n y: %f,\n z: %f", cam_up.x, cam_up.y, cam_up.z);
+
+		glm::vec2 cam_chunk_pos = glm::vec2( 
+			glm::floor(cam_eye.x / CHUNK_SIZE),
+			glm::floor(cam_eye.z / CHUNK_SIZE)
+		);
+		glm::vec3 cam_block_pos = glm::vec3(
+			glm::floor((int)cam_eye.x % CHUNK_SIZE), 
+			glm::floor(cam_eye.y), 
+			glm::floor((int)cam_eye.z % CHUNK_SIZE) 
+		);
+
+		ImGui::Text("\nCurrent position:");
+		ImGui::Text("Chunk position:\n x: %f,\n z: %f", cam_chunk_pos.x, cam_chunk_pos.y);
+		ImGui::Text("Block position:\n x: %f,\n y: %f,\n z: %f", cam_block_pos.x, cam_block_pos.y, cam_block_pos.z);
+
+		ImGui::End();
+	}
+
 }
 
 void CMyApp::KeyboardDown(SDL_KeyboardEvent& key)
