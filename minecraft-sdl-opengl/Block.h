@@ -7,7 +7,7 @@
 
 #define TEX_SIZE 1.0f/16
 
-enum class BlockType { Air, Dirt, Stone };
+enum class BlockType { Air, Dirt, Grass, Stone };
 enum class TextureSide { Top, Side, Bottom };
 
 class ChunkMesh;
@@ -44,5 +44,6 @@ private:
 	glm::vec2 sideTexPos;
 	glm::vec2 bottomTexPos;
 	void SetTextures(); 
+	glm::vec2 getTexPos(int col, int row);
 };
 

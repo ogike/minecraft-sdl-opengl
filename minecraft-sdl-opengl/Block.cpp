@@ -9,10 +9,11 @@ void Block::AddToMesh(ChunkMesh& mesh, NeighbourCollision colls) const
 	if(!colls.front)
 		mesh.addFace(
 			origPos,
-			glm::vec3(-0.5, -0.5, +0.5), //vertices
-			glm::vec3(+0.5, -0.5, +0.5),
-			glm::vec3(-0.5, +0.5, +0.5),
-			glm::vec3(+0.5, +0.5, +0.5),
+			//vertices
+			glm::vec3(-0.5, -0.5, +0.5), //btm left
+			glm::vec3(+0.5, -0.5, +0.5), //btm right
+			glm::vec3(-0.5, +0.5, +0.5), //top left
+			glm::vec3(+0.5, +0.5, +0.5), //top right
 			glm::vec3(0, 0, 1), //normal
 			sideTexPos //tex
 		);
@@ -21,7 +22,8 @@ void Block::AddToMesh(ChunkMesh& mesh, NeighbourCollision colls) const
 	if (!colls.back)
 		mesh.addFace(
 			origPos,
-			glm::vec3(+0.5, -0.5, -0.5), //vertices
+			//vertices
+			glm::vec3(+0.5, -0.5, -0.5), 
 			glm::vec3(-0.5, -0.5, -0.5),
 			glm::vec3(+0.5, +0.5, -0.5),
 			glm::vec3(-0.5, +0.5, -0.5),
@@ -33,7 +35,8 @@ void Block::AddToMesh(ChunkMesh& mesh, NeighbourCollision colls) const
 	if (!colls.right)
 		mesh.addFace(
 			origPos,
-			glm::vec3(+0.5, -0.5, +0.5), //vertices
+			//vertices
+			glm::vec3(+0.5, -0.5, +0.5), 
 			glm::vec3(+0.5, -0.5, -0.5),
 			glm::vec3(+0.5, +0.5, +0.5),
 			glm::vec3(+0.5, +0.5, -0.5),
@@ -45,7 +48,8 @@ void Block::AddToMesh(ChunkMesh& mesh, NeighbourCollision colls) const
 	if (!colls.left)
 		mesh.addFace(
 			origPos,
-			glm::vec3(-0.5, -0.5, -0.5), //vertices
+			//vertices
+			glm::vec3(-0.5, -0.5, -0.5), 
 			glm::vec3(-0.5, -0.5, +0.5),
 			glm::vec3(-0.5, +0.5, -0.5),
 			glm::vec3(-0.5, +0.5, +0.5),
@@ -57,7 +61,8 @@ void Block::AddToMesh(ChunkMesh& mesh, NeighbourCollision colls) const
 	if (!colls.top)
 		mesh.addFace(
 			origPos,
-			glm::vec3(-0.5, +0.5, +0.5), //vertices
+			//vertices
+			glm::vec3(-0.5, +0.5, +0.5), 
 			glm::vec3(+0.5, +0.5, +0.5),
 			glm::vec3(-0.5, +0.5, -0.5),
 			glm::vec3(+0.5, +0.5, -0.5),
@@ -69,7 +74,8 @@ void Block::AddToMesh(ChunkMesh& mesh, NeighbourCollision colls) const
 	if (!colls.bottom)
 		mesh.addFace(
 			origPos,
-			glm::vec3(-0.5, -0.5, -0.5), //vertices
+			//vertices
+			glm::vec3(-0.5, -0.5, -0.5), 
 			glm::vec3(+0.5, -0.5, -0.5),
 			glm::vec3(-0.5, -0.5, +0.5),
 			glm::vec3(+0.5, -0.5, +0.5),
@@ -85,21 +91,31 @@ void Block::SetTextures()
 	switch (type)
 	{
 		case BlockType::Dirt:
-
-			topTexPos = glm::vec2(0, 0);;
-			sideTexPos = glm::vec2(2 * TEX_SIZE, 0);
-			bottomTexPos = glm::vec2(3 * TEX_SIZE, 0);
+			topTexPos = getTexPos(2, 0);
+			sideTexPos = getTexPos(2, 0);
+			bottomTexPos = getTexPos(2, 0);
+			break;
+		case BlockType::Grass:
+			topTexPos = getTexPos(0, 0);
+			sideTexPos = getTexPos(3, 0);
+			bottomTexPos = getTexPos(2, 0);
 			break;
 		case BlockType::Stone:
-			topTexPos = glm::vec2(1 * TEX_SIZE, 0);
-			sideTexPos = topTexPos;
-			bottomTexPos = topTexPos;
+			topTexPos = getTexPos(0, 1);
+			sideTexPos = getTexPos(0, 1);
+			bottomTexPos = getTexPos(0, 1);
 			break;
 		default: //invalid texture
-			topTexPos = glm::vec2(6 * TEX_SIZE, 2 * TEX_SIZE);
-			sideTexPos = topTexPos;
-			bottomTexPos = topTexPos;
+			topTexPos = getTexPos(6, 3);
+			sideTexPos = getTexPos(6, 3);
+			bottomTexPos = getTexPos(6, 3);
 			break;
 	}
 	//topRight = topLeft +
+}
+
+//gives back the top left corner of the tile in the atlas
+glm::vec2 Block::getTexPos(int col, int row)
+{
+	return glm::vec2(col * TEX_SIZE, 1 -  row * TEX_SIZE );
 }
