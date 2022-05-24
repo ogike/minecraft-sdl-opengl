@@ -3,30 +3,71 @@
 
 void World::GenerateTerrain()
 {
-	for (int x = -5; x < 5; x++)
+	/*for (int x = -5; x < 5; x++)
 	{
 		for (int y = -5; y < 5; y++)
 		{
 			GenerateSolidChunk(ChunkPosition(x, y));
 		}
-	}
+	}*/
 	/*GenerateSolidChunk(ChunkPosition(0, 0));
 	GenerateSolidChunk(ChunkPosition(-1, 0));*/
 	//GenerateSingleCube( ChunkPosition(0,0) );
+
+	FastNoiseLite noise;
+	noise.SetNoiseType(FastNoiseLite::NoiseType_Perlin);
+
+	for (int x = -WORLD_SIZE_CHUNKS/2; x < WORLD_SIZE_CHUNKS/2; x++)
+	{
+		for (int z = -WORLD_SIZE_CHUNKS / 2; z < WORLD_SIZE_CHUNKS / 2; z++)
+		{
+			GeneratePerlinChunk(ChunkPosition(x, z), noise);
+		}
+	}
+
 	BuildChunkMeshes();
 }
+
+void World::GeneratePerlinChunk(ChunkPosition chunkPos, FastNoiseLite& noise)
+{
+	Chunk* newChunk = new Chunk(chunkPos, this);
+
+	for (int x = 0; x < CHUNK_SIZE; x++)
+	{
+		for (int z = 0; z < CHUNK_SIZE; z++)
+		{
+			float randomNoise = noise.GetNoise((float)(x + chunkPos.GetX() * CHUNK_SIZE), (float)(z + chunkPos.GetZ() * CHUNK_SIZE));
+			int randomHeight = (randomNoise * TERRAIN_LAND_CEILING / 2) + TERRAIN_LAND_CEILING / 2;
+			
+			for (int y = 0; y <= randomHeight; y++)
+			{
+				BlockPosition blockPos = BlockPosition(x, y, z);
+				BlockType blockType;
+				if (y == randomHeight)			blockType = BlockType::Grass;
+				else if (y >= randomHeight - 3)	blockType = BlockType::Dirt;
+				else						blockType = BlockType::Stone;
+
+				newChunk->AddBlock(new Block(blockType, blockPos, chunkPos), blockPos);
+			}
+		}
+	}
+
+	chunks[chunkPos] = newChunk;
+}
+
+
 
 void World::GenerateSolidChunk(ChunkPosition chunkPos)
 {
 	Chunk* solidChunk = new Chunk(chunkPos, this);
 
 	//insert debug chunk w blocks
-	for (int x = 0; x < CHUNK_WIDTH; x++)
+	for (int x = 0; x < CHUNK_SIZE; x++)
 	{
 		int maxHeight = x + 1;
 		for (int y = 0; y <= maxHeight; y++)
 		{
-			for (int z = 0; z < CHUNK_LENGTH; z++)
+			for (int z = 0; z < CHUNK_SIZE; z++)
 			{
 				BlockPosition blockPos = BlockPosition(x, y, z);
 				BlockType blockType;

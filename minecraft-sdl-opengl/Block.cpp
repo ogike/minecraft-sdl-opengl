@@ -101,9 +101,9 @@ void Block::SetTextures()
 			bottomTexPos = getTexPos(2, 0);
 			break;
 		case BlockType::Stone:
-			topTexPos = getTexPos(0, 1);
-			sideTexPos = getTexPos(0, 1);
-			bottomTexPos = getTexPos(0, 1);
+			topTexPos = getTexPos(1, 0);
+			sideTexPos = getTexPos(1, 0);
+			bottomTexPos = getTexPos(1, 0);
 			break;
 		default: //invalid texture
 			topTexPos = getTexPos(6, 3);

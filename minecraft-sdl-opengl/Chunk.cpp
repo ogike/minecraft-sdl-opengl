@@ -38,11 +38,11 @@ bool Chunk::IsSolidAt(BlockPosition pos)
 	if (pos.GetX() < 0) {
 		Chunk* toLeftChunk = myWorld->getChunkAt( myChunkPos.ToLeft() );
 		if (toLeftChunk == nullptr) return false;
-		return toLeftChunk->IsSolidAt( BlockPosition(CHUNK_WIDTH - 1, pos.GetY(), pos.GetY()) );
+		return toLeftChunk->IsSolidAt( BlockPosition(CHUNK_SIZE - 1, pos.GetY(), pos.GetY()) );
 	}
 
 	//Block is in the chunk to the right
-	if (pos.GetX() >= CHUNK_WIDTH) {
+	if (pos.GetX() >= CHUNK_SIZE) {
 		Chunk* toRightChunk = myWorld->getChunkAt(myChunkPos.ToRight());
 		if(toRightChunk == nullptr) return false;
 		return toRightChunk->IsSolidAt(BlockPosition(0, pos.GetY(), pos.GetY()));
@@ -52,11 +52,11 @@ bool Chunk::IsSolidAt(BlockPosition pos)
 	if (pos.GetZ() < 0) {
 		Chunk* toBackChunk = myWorld->getChunkAt(myChunkPos.ToBack());
 		if(toBackChunk == nullptr) return false;
-		return toBackChunk->IsSolidAt(BlockPosition(pos.GetX(), pos.GetY(), CHUNK_LENGTH-1));
+		return toBackChunk->IsSolidAt(BlockPosition(pos.GetX(), pos.GetY(), CHUNK_SIZE -1));
 	}
 
 	//Block is in the chunk to the right
-	if (pos.GetZ() >= CHUNK_WIDTH) {
+	if (pos.GetZ() >= CHUNK_SIZE) {
 		Chunk* toFrontChunk = myWorld->getChunkAt(myChunkPos.ToFront());
 		if(toFrontChunk == nullptr) return false;
 		return toFrontChunk->IsSolidAt(BlockPosition(pos.GetX(), pos.GetY(), 0));

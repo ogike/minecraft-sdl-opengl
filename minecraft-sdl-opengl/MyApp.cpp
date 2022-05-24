@@ -11,7 +11,7 @@
 
 CMyApp::CMyApp(void)
 {
-	m_camera.SetView(glm::vec3(5, 5, 5), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+	m_camera.SetView(glm::vec3(5, TERRAIN_LAND_CEILING, 5), glm::vec3(0, TERRAIN_LAND_CEILING - 10, 0), glm::vec3(0, 1, 0));
 	m_mesh = nullptr;
 }
 
@@ -292,7 +292,7 @@ void CMyApp::Render()
 
 
 	//ImGui Testwindow
-	ImGui::ShowTestWindow();
+	//ImGui::ShowTestWindow();
 
 	m_programAxis.Use();
 	m_programAxis.SetUniform("MVP", m_camera.GetViewProj());

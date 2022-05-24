@@ -2,6 +2,7 @@
 
 #include <glm/vec3.hpp>
 #include "ChunkPosition.h"
+#include "Constants.h"
 
 class BlockPosition
 {
@@ -13,9 +14,9 @@ public:
 
 	glm::vec3 GetGlobalPos(ChunkPosition chunkPos) const {
 		return glm::vec3(
-			16 * chunkPos.GetX() + _x + 0.5f,
+			CHUNK_SIZE * chunkPos.GetX() + _x + 0.5f,
 			_y + 0.5f,
-			16 * chunkPos.GetZ() + _z + 0.5f
+			CHUNK_SIZE * chunkPos.GetZ() + _z + 0.5f
 		);
 	}
 

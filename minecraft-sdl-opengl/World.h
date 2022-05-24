@@ -3,6 +3,9 @@
 #include <map>
 #include "ChunkPosition.h"
 #include "Chunk.h"
+#include "FastNoiseLite.h"
+#include "Constants.h"
+
 
 class Chunk;
 
@@ -10,6 +13,8 @@ class World
 {
 public:
 	void GenerateTerrain();
+
+	void GeneratePerlinChunk(ChunkPosition chunkPos, FastNoiseLite& noise);
 
 	//generates one solid chunk (temporarily: a stair)
 	void GenerateSolidChunk(ChunkPosition chunkPos);

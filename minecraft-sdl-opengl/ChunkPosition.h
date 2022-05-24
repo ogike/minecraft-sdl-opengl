@@ -1,11 +1,7 @@
 #pragma once
 
 #include <glm/vec3.hpp>
-
-//TODO: constants in one place
-#define CHUNK_WIDTH 16
-#define CHUNK_HEIGHT 256
-#define CHUNK_LENGTH 16
+#include "Constants.h"
 
 class ChunkPosition
 {
@@ -26,7 +22,7 @@ public:
 	}
 
 	glm::vec3 getGlobalPos() {
-		return glm::vec3( _x * CHUNK_WIDTH, 0, _z * CHUNK_LENGTH );
+		return glm::vec3( _x * CHUNK_SIZE, 0, _z * CHUNK_SIZE);
 	}
 
 	ChunkPosition ToFront()  const { return ChunkPosition(_x    , _z + 1); }

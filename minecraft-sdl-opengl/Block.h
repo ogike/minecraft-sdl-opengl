@@ -5,7 +5,7 @@
 #include "ChunkMesh.h"
 #include <GL/glew.h>
 
-#define TEX_SIZE 1.0f/16
+#include "Constants.h"
 
 enum class BlockType { Air, Dirt, Grass, Stone };
 enum class TextureSide { Top, Side, Bottom };
