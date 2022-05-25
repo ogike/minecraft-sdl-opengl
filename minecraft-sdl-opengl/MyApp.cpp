@@ -175,6 +175,8 @@ void CMyApp::Render()
 	m_program.SetUniform("MVP", viewProj * origoWorld);
 	m_program.SetUniform("world", origoWorld);
 	m_program.SetUniform("worldIT", glm::inverse(glm::transpose(origoWorld)));
+	m_program.SetUniform("eye", m_camera.GetEye());
+	m_program.SetUniform("light_pos", m_world.highestPoint);
 
 	m_world.Draw();
 
