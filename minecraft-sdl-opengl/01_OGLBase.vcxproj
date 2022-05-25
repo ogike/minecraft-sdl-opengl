@@ -130,6 +130,8 @@
     <ClCompile Include="World.cpp" />
     <None Include="axis.frag" />
     <None Include="axis.vert" />
+    <None Include="crosshair.frag" />
+    <None Include="crosshair.vert" />
     <None Include="Includes\BufferObject.inl" />
     <None Include="Includes\ProgramObject.inl" />
     <None Include="Includes\TextureObject.inl" />

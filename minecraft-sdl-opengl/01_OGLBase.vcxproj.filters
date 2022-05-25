@@ -185,6 +185,12 @@
     <None Include="axis.frag">
       <Filter>Shaders</Filter>
     </None>
+    <None Include="crosshair.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="crosshair.vert">
+      <Filter>Shaders</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="minecraft-sdl-opengl.rc">

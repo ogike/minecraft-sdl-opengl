@@ -201,6 +201,13 @@ void CMyApp::InitShaders()
 			{ GL_FRAGMENT_SHADER, "axis.frag" }
 		}
 	);
+
+	m_programCrossHair.Init(
+		{
+			{ GL_VERTEX_SHADER, "crosshair.vert" },
+			{ GL_FRAGMENT_SHADER, "crosshair.frag" }
+		}
+	);
 }
 
 bool CMyApp::Init()
@@ -261,7 +268,6 @@ void CMyApp::Render()
 	m_program.SetUniform("world", origoWorld);
 	m_program.SetUniform("worldIT", glm::inverse(glm::transpose(origoWorld)));
 
-	//Terrain ///////////////////////////////////////////
 	m_world.Draw();
 
 	m_program.Unuse();
@@ -291,14 +297,21 @@ void CMyApp::Render()
 	glDepthFunc(prevDepthFnc);
 
 
-	//ImGui Testwindow
-	//ImGui::ShowTestWindow();
-
-
+	//the three axis
 	m_programAxis.Use();
 	m_programAxis.SetUniform("MVP", m_camera.GetViewProj());
 	glDrawArrays(GL_LINES, 0, 6); //többi vertex shaderen belül
 	m_programAxis.Unuse();
+
+
+	//crosshair
+	m_programCrossHair.Use();
+
+	m_programCrossHair.SetUniform("window_ratio", window_ratio);
+	glDrawArrays(GL_LINES, 0, 4);
+
+	m_programCrossHair.Unuse();
+
 
 	//Debug window
 	if (ImGui::Begin("Debug window")) {
@@ -363,4 +376,5 @@ void CMyApp::Resize(int _w, int _h)
 	glViewport(0, 0, _w, _h );
 
 	m_camera.Resize(_w, _h);
+	window_ratio = (float)_w / _h;
 }

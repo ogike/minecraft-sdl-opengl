@@ -55,6 +55,7 @@ protected:
 	ProgramObject		m_program;			// mesh shader
 	ProgramObject		m_programSkybox;	// skybox shader
 	ProgramObject		m_programAxis;		//coordinate axis
+	ProgramObject		m_programCrossHair; //crosshair
 
 	VertexArrayObject	m_CubeVao;			// VAO
 	IndexBuffer			m_CubeIndices;		// index buffer
@@ -87,5 +88,7 @@ protected:
 	void InitShaders();
 	void InitCube();
 	void InitSkyBox();
+
+	float window_ratio = 1.0f;
 };
 
