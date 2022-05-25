@@ -7,7 +7,7 @@
 
 #include "Constants.h"
 
-enum class BlockType { Air, Dirt, Grass, Stone };
+enum class BlockType { Air, Dirt, Grass, Stone, Iron, Coal };
 enum class TextureSide { Top, Side, Bottom };
 
 class ChunkMesh;

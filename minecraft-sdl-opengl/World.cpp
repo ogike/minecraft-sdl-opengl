@@ -1,5 +1,7 @@
 #include "World.h"
-#include "ChunkPosition.h"
+#include <stdlib.h>
+#include <time.h>
+
 
 void World::GenerateTerrain()
 {
@@ -31,6 +33,7 @@ void World::GenerateTerrain()
 void World::GeneratePerlinChunk(ChunkPosition chunkPos, FastNoiseLite& noise)
 {
 	Chunk* newChunk = new Chunk(chunkPos, this);
+	srand(time(NULL));
 
 	for (int x = 0; x < CHUNK_SIZE; x++)
 	{
@@ -43,9 +46,22 @@ void World::GeneratePerlinChunk(ChunkPosition chunkPos, FastNoiseLite& noise)
 			{
 				BlockPosition blockPos = BlockPosition(x, y, z);
 				BlockType blockType;
-				if (y == randomHeight)			blockType = BlockType::Grass;
-				else if (y >= randomHeight - 3)	blockType = BlockType::Dirt;
-				else						blockType = BlockType::Stone;
+				if (y == randomHeight)
+					blockType = BlockType::Grass;
+				else if (y >= randomHeight - 3)
+					blockType = BlockType::Dirt;
+				else { //stone
+					int oreRand = rand() % 100;
+					if (oreRand <= IRON_CHANCE) {
+						blockType = BlockType::Iron;
+					}
+					else if (oreRand <= COAL_CHANCE + IRON_CHANCE) {
+						blockType = BlockType::Coal;
+					}
+					else {
+						blockType = BlockType::Stone;
+					}
+				}
 
 				newChunk->AddBlock(new Block(blockType, blockPos, chunkPos), blockPos);
 			}

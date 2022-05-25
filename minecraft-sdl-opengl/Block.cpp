@@ -105,6 +105,16 @@ void Block::SetTextures()
 			sideTexPos = getTexPos(1, 0);
 			bottomTexPos = getTexPos(1, 0);
 			break;
+		case BlockType::Iron:
+			topTexPos = getTexPos(1, 2);
+			sideTexPos = getTexPos(1, 2);
+			bottomTexPos = getTexPos(1, 2);
+			break;
+		case BlockType::Coal:
+			topTexPos = getTexPos(2, 2);
+			sideTexPos = getTexPos(2, 2);
+			bottomTexPos = getTexPos(2, 2);
+			break;
 		default: //invalid texture
 			topTexPos = getTexPos(6, 3);
 			sideTexPos = getTexPos(6, 3);
