@@ -325,8 +325,8 @@ void CMyApp::Render()
 		ImGui::Text("Chunk position:\n x: %f,\n z: %f", cam_chunk_pos.x, cam_chunk_pos.y);
 		ImGui::Text("Block position:\n x: %f,\n y: %f,\n z: %f", cam_block_pos.x, cam_block_pos.y, cam_block_pos.z);
 
-		ImGui::End();
 	}
+	ImGui::End();
 
 }
 

@@ -13,11 +13,15 @@ gCamera::gCamera(void) : m_eye(0.0f, 20.0f, 20.0f), m_at(0.0f), m_up(0.0f, 1.0f,
 	m_dist = glm::length( m_at - m_eye );	
 
 	SetProj(glm::radians(60.0f), 640/480.0f, 0.01f, 1000.0f);
+
+	SDL_SetRelativeMouseMode(m_relativeMouseMode ? SDL_TRUE : SDL_FALSE);
 }
 
 gCamera::gCamera(glm::vec3 _eye, glm::vec3 _at, glm::vec3 _up) : m_speed(16.0f), m_goFw(0), m_goRight(0), m_dist(10), m_slow(false)
 {
 	SetView(_eye, _at, _up);
+
+	SDL_SetRelativeMouseMode(m_relativeMouseMode ? SDL_TRUE : SDL_FALSE);
 }
 
 gCamera::~gCamera(void)
@@ -106,6 +110,10 @@ void gCamera::KeyboardDown(SDL_KeyboardEvent& key)
 	case SDLK_d:
 			m_goRight = 1;
 		break;
+	case SDLK_SPACE:
+		m_relativeMouseMode = !m_relativeMouseMode;
+		SDL_SetRelativeMouseMode(m_relativeMouseMode ? SDL_TRUE : SDL_FALSE);
+		break;
 	}
 }
 
@@ -135,7 +143,7 @@ void gCamera::KeyboardUp(SDL_KeyboardEvent& key)
 
 void gCamera::MouseMove(SDL_MouseMotionEvent& mouse)
 {
-	if ( mouse.state & SDL_BUTTON_LMASK )
+	if ( m_relativeMouseMode )
 	{
 		UpdateUV(mouse.xrel/100.0f, mouse.yrel/100.0f);
 	}

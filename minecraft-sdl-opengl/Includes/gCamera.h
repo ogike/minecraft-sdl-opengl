@@ -74,6 +74,7 @@ private:
 	glm::mat4	m_matViewProj;
 
 	bool	m_slow;
+	bool	m_relativeMouseMode;
 
 	/// <summary>
 	/// The camera position.
