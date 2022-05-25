@@ -57,9 +57,6 @@ protected:
 	ProgramObject		m_programAxis;		//coordinate axis
 	ProgramObject		m_programCrossHair; //crosshair
 
-	VertexArrayObject	m_CubeVao;			// VAO
-	IndexBuffer			m_CubeIndices;		// index buffer
-	ArrayBuffer			m_CubeVertexBuffer;	// VBO
 	VertexArrayObject	m_SkyboxVao;
 	IndexBuffer			m_SkyboxIndices;	
 	ArrayBuffer			m_SkyboxPos;	
@@ -67,8 +64,6 @@ protected:
 
 	gCamera				m_camera;
 
-	Texture2D			m_woodTexture;
-	Texture2D			m_suzanneTexture;
 	Texture2D			m_textureAtlas;
 	TextureCubeMap		m_skyboxTexture;
 
@@ -81,12 +76,8 @@ protected:
 		glm::vec2 t;
 	};
 
-	// mesh adatok
-	std::unique_ptr<Mesh> m_mesh;
 
-	// a jobb olvashatóság kedvéért
 	void InitShaders();
-	void InitCube();
 	void InitSkyBox();
 
 	float window_ratio = 1.0f;

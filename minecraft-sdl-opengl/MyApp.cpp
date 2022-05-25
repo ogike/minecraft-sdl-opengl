@@ -12,93 +12,10 @@
 CMyApp::CMyApp(void)
 {
 	m_camera.SetView(glm::vec3(5, TERRAIN_LAND_CEILING, 5), glm::vec3(0, TERRAIN_LAND_CEILING - 10, 0), glm::vec3(0, 1, 0));
-	m_mesh = nullptr;
 }
 
 CMyApp::~CMyApp(void)
 {
-}
-
-void CMyApp::InitCube()
-{
-	//struct Vertex{ glm::vec3 position; glm::vec3 normals; glm::vec2 texture; };
-	std::vector<Vertex>vertices;
-	
-	//front									 
-	vertices.push_back({ glm::vec3(-0.5, -0.5, +0.5), glm::vec3(0, 0, 1), glm::vec2(0, 0) });
-	vertices.push_back({ glm::vec3(+0.5, -0.5, +0.5), glm::vec3(0, 0, 1), glm::vec2(1, 0) });
-	vertices.push_back({ glm::vec3(-0.5, +0.5, +0.5), glm::vec3(0, 0, 1), glm::vec2(0, 1) });
-	vertices.push_back({ glm::vec3(+0.5, +0.5, +0.5), glm::vec3(0, 0, 1), glm::vec2(1, 1) });
-	//back
-	vertices.push_back({ glm::vec3(+0.5, -0.5, -0.5), glm::vec3(0, 0, -1), glm::vec2(0, 0) });
-	vertices.push_back({ glm::vec3(-0.5, -0.5, -0.5), glm::vec3(0, 0, -1), glm::vec2(1, 0) });
-	vertices.push_back({ glm::vec3(+0.5, +0.5, -0.5), glm::vec3(0, 0, -1), glm::vec2(0, 1) });
-	vertices.push_back({ glm::vec3(-0.5, +0.5, -0.5), glm::vec3(0, 0, -1), glm::vec2(1, 1) });
-	//right									 
-	vertices.push_back({ glm::vec3(+0.5, -0.5, +0.5), glm::vec3(1, 0, 0), glm::vec2(0, 0) });
-	vertices.push_back({ glm::vec3(+0.5, -0.5, -0.5), glm::vec3(1, 0, 0), glm::vec2(1, 0) });
-	vertices.push_back({ glm::vec3(+0.5, +0.5, +0.5), glm::vec3(1, 0, 0), glm::vec2(0, 1) });
-	vertices.push_back({ glm::vec3(+0.5, +0.5, -0.5), glm::vec3(1, 0, 0), glm::vec2(1, 1) });
-	//left									 
-	vertices.push_back({ glm::vec3(-0.5, -0.5, -0.5), glm::vec3(-1, 0, 0), glm::vec2(0, 0) });
-	vertices.push_back({ glm::vec3(-0.5, -0.5, +0.5), glm::vec3(-1, 0, 0), glm::vec2(1, 0) });
-	vertices.push_back({ glm::vec3(-0.5, +0.5, -0.5), glm::vec3(-1, 0, 0), glm::vec2(0, 1) });
-	vertices.push_back({ glm::vec3(-0.5, +0.5, +0.5), glm::vec3(-1, 0, 0), glm::vec2(1, 1) });
-	//top									 
-	vertices.push_back({ glm::vec3(-0.5, +0.5, +0.5), glm::vec3(0, 1, 0), glm::vec2(0, 0) });
-	vertices.push_back({ glm::vec3(+0.5, +0.5, +0.5), glm::vec3(0, 1, 0), glm::vec2(1, 0) });
-	vertices.push_back({ glm::vec3(-0.5, +0.5, -0.5), glm::vec3(0, 1, 0), glm::vec2(0, 1) });
-	vertices.push_back({ glm::vec3(+0.5, +0.5, -0.5), glm::vec3(0, 1, 0), glm::vec2(1, 1) });
-	//bottom								 
-	vertices.push_back({ glm::vec3(-0.5, -0.5, -0.5), glm::vec3(0, -1, 0), glm::vec2(0, 0) });
-	vertices.push_back({ glm::vec3(+0.5, -0.5, -0.5), glm::vec3(0, -1, 0), glm::vec2(1, 0) });
-	vertices.push_back({ glm::vec3(-0.5, -0.5, +0.5), glm::vec3(0, -1, 0), glm::vec2(0, 1) });
-	vertices.push_back({ glm::vec3(+0.5, -0.5, +0.5), glm::vec3(0, -1, 0), glm::vec2(1, 1) });
-
-	std::vector<int> indices(36);
-	int index = 0;
-	for (int i = 0; i < 6 * 4; i += 4)
-	{
-		indices[index + 0] = i + 0;
-		indices[index + 1] = i + 1;
-		indices[index + 2] = i + 2;
-		indices[index + 3] = i + 1;
-		indices[index + 4] = i + 3;
-		indices[index + 5] = i + 2;
-		index += 6;
-	}
-
-	//
-	// geometria definiálása (std::vector<...>) és GPU pufferekbe való feltöltése BufferData-val
-	//
-
-	// vertexek pozíciói:
-	/*
-	Az m_CubeVertexBuffer konstruktora már létrehozott egy GPU puffer azonosítót és a most következő BufferData hívás ezt
-	1. bind-olni fogja GL_ARRAY_BUFFER target-re (hiszen m_CubeVertexBuffer típusa ArrayBuffer) és
-	2. glBufferData segítségével áttölti a GPU-ra az argumentumban adott tároló értékeit
-
-	*/
-
-	m_CubeVertexBuffer.BufferData(vertices);
-
-	// és a primitíveket alkotó csúcspontok indexei (az előző tömbökből) - triangle list-el való kirajzolásra felkészülve
-	m_CubeIndices.BufferData(indices);
-
-	// geometria VAO-ban való regisztrálása
-	m_CubeVao.Init(
-		{
-			// 0-ás attribútum "lényegében" glm::vec3-ak sorozata és az adatok az m_CubeVertexBuffer GPU pufferben vannak
-			{ CreateAttribute<		0,						// attribútum: 0
-									glm::vec3,				// CPU oldali adattípus amit a 0-ás attribútum meghatározására használtunk <- az eljárás a glm::vec3-ból kikövetkezteti, hogy 3 darab float-ból áll a 0-ás attribútum
-									0,						// offset: az attribútum tároló elejétől vett offset-je, byte-ban
-									sizeof(Vertex)			// stride: a következő csúcspont ezen attribútuma hány byte-ra van az aktuálistól
-								>, m_CubeVertexBuffer },
-			{ CreateAttribute<1, glm::vec3, (sizeof(glm::vec3)), sizeof(Vertex)>, m_CubeVertexBuffer },
-			{ CreateAttribute<2, glm::vec2, (2 * sizeof(glm::vec3)), sizeof(Vertex)>, m_CubeVertexBuffer },
-		},
-		m_CubeIndices
-	);
 }
 
 void CMyApp::InitSkyBox()
@@ -219,19 +136,11 @@ bool CMyApp::Init()
 	glEnable(GL_DEPTH_TEST); // mélységi teszt bekapcsolása (takarás)
 
 	InitShaders();
-	InitCube();
 	InitSkyBox();
 
 	m_world.GenerateTerrain();
 
-	// egyéb textúrák betöltése
-	m_woodTexture.FromFile("assets/wood.jpg");
-	m_suzanneTexture.FromFile("assets/marron.jpg");
 	m_textureAtlas.FromFile("assets/atlas.png");
-
-	// mesh betöltése
-	//m_mesh = std::unique_ptr<Mesh>(ObjParser::parse("assets/Suzanne.obj"));
-	//m_mesh->initBuffers();
 	
 	// kamera
 	m_camera.SetProj(glm::radians(60.0f), 640.0f / 480.0f, 0.01f, 1000.0f);
@@ -255,7 +164,6 @@ void CMyApp::Update()
 
 void CMyApp::Render()
 {
-	// töröljük a frampuffert (GL_COLOR_BUFFER_BIT) és a mélységi Z puffert (GL_DEPTH_BUFFER_BIT)
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glm::mat4 viewProj = m_camera.GetViewProj();
@@ -273,22 +181,18 @@ void CMyApp::Render()
 	m_program.Unuse();
 
 	// skybox
-	// mentsük el az előző Z-test eredményt, azaz azt a relációt, ami alapján update-eljük a pixelt.
 	GLint prevDepthFnc;
 	glGetIntegerv(GL_DEPTH_FUNC, &prevDepthFnc);
 
-	// most kisebb-egyenlőt használjunk, mert mindent kitolunk a távoli vágósíkokra
 	glDepthFunc(GL_LEQUAL);
 
 	m_SkyboxVao.Bind();
 	m_programSkybox.Use();
 	m_programSkybox.SetUniform("MVP", viewProj * glm::translate( m_camera.GetEye()) );
 	
-	// cube map textúra beállítása 0-ás mintavételezőre és annak a shaderre beállítása
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_CUBE_MAP, m_skyboxTexture);
 	glUniform1i(m_programSkybox.GetLocation("skyboxTexture"), 0);
-	// az előző három sor <=> m_programSkybox.SetCubeTexture("skyboxTexture", 0, m_skyboxTexture);
 
 	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, nullptr);
 	m_programSkybox.Unuse();
@@ -300,7 +204,7 @@ void CMyApp::Render()
 	//the three axis
 	m_programAxis.Use();
 	m_programAxis.SetUniform("MVP", m_camera.GetViewProj());
-	glDrawArrays(GL_LINES, 0, 6); //többi vertex shaderen belül
+	glDrawArrays(GL_LINES, 0, 6); //the vertex positions are hardcoded in the vertex shader
 	m_programAxis.Unuse();
 
 
@@ -308,30 +212,22 @@ void CMyApp::Render()
 	m_programCrossHair.Use();
 
 	m_programCrossHair.SetUniform("window_ratio", window_ratio);
-	glDrawArrays(GL_LINES, 0, 4);
+	glDrawArrays(GL_LINES, 0, 4); //the positions are hardcoded in the vertex shader
 
 	m_programCrossHair.Unuse();
 
 
 	//Debug window
 	if (ImGui::Begin("Debug window")) {
-		glm::vec3 cam_eye = m_camera.GetEye();
-		glm::vec3 cam_at  = m_camera.GetAt();
-		glm::vec3 cam_up  = m_camera.GetUp();
-
-		ImGui::Text("Camera positions:");
-		ImGui::Text("Global position:\n x: %f,\n y: %f,\n z: %f", cam_eye.x, cam_eye.y, cam_eye.z);
-		ImGui::Text("Looking at:\n x: %f,\n y: %f,\n z: %f", cam_at.x, cam_at.y, cam_at.z);
-		ImGui::Text("Up direction:\n x: %f,\n y: %f,\n z: %f", cam_up.x, cam_up.y, cam_up.z);
-
+		glm::vec3 cam_global = m_camera.GetEye();
 		glm::vec2 cam_chunk_pos = glm::vec2( 
-			glm::floor(cam_eye.x / CHUNK_SIZE),
-			glm::floor(cam_eye.z / CHUNK_SIZE)
+			glm::floor(cam_global.x / CHUNK_SIZE),
+			glm::floor(cam_global.z / CHUNK_SIZE)
 		);
 		glm::vec3 cam_block_pos = glm::vec3(
-			glm::floor((int)cam_eye.x % CHUNK_SIZE), 
-			glm::floor(cam_eye.y), 
-			glm::floor((int)cam_eye.z % CHUNK_SIZE) 
+			glm::floor((int)cam_global.x % CHUNK_SIZE),
+			glm::floor(cam_global.y),
+			glm::floor((int)cam_global.z % CHUNK_SIZE)
 		);
 
 		ImGui::Text("\nCurrent position:");

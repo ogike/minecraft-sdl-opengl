@@ -3,7 +3,7 @@
 #define WORLD_SIZE_CHUNKS 10
 
 //the max height of generated terrain blocks
-#define TERRAIN_LAND_CEILING 60
+#define TERRAIN_LAND_CEILING 100
 
 #define CHUNK_SIZE 16
 #define CHUNK_HEIGHT 256
