@@ -27,16 +27,16 @@
     <ClInclude Include="MyApp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="T:\OGLPack\include\imgui\imconfig.h">
+    <ClInclude Include="Includes\OGLPack\include\imgui\imconfig.h">
       <Filter>imgui</Filter>
     </ClInclude>
-    <ClInclude Include="T:\OGLPack\include\imgui\imgui.h">
+    <ClInclude Include="Includes\OGLPack\include\imgui\imgui.h">
       <Filter>imgui</Filter>
     </ClInclude>
-    <ClInclude Include="T:\OGLPack\include\imgui\imgui_impl_sdl_gl3.h">
+    <ClInclude Include="Includes\OGLPack\include\imgui\imgui_impl_sdl_gl3.h">
       <Filter>imgui</Filter>
     </ClInclude>
-    <ClInclude Include="T:\OGLPack\include\imgui\imgui_internal.h">
+    <ClInclude Include="Includes\OGLPack\include\imgui\imgui_internal.h">
       <Filter>imgui</Filter>
     </ClInclude>
     <ClInclude Include="Includes\BufferObject.h">
@@ -105,16 +105,16 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="T:\OGLPack\include\imgui\imgui.cpp">
+    <ClCompile Include="Includes\OGLPack\include\imgui\imgui.cpp">
       <Filter>imgui</Filter>
     </ClCompile>
-    <ClCompile Include="T:\OGLPack\include\imgui\imgui_demo.cpp">
+    <ClCompile Include="Includes\OGLPack\include\imgui\imgui_demo.cpp">
       <Filter>imgui</Filter>
     </ClCompile>
-    <ClCompile Include="T:\OGLPack\include\imgui\imgui_draw.cpp">
+    <ClCompile Include="Includes\OGLPack\include\imgui\imgui_draw.cpp">
       <Filter>imgui</Filter>
     </ClCompile>
-    <ClCompile Include="T:\OGLPack\include\imgui\imgui_impl_sdl_gl3.cpp">
+    <ClCompile Include="Includes\OGLPack\include\imgui\imgui_impl_sdl_gl3.cpp">
       <Filter>imgui</Filter>
     </ClCompile>
     <ClCompile Include="Includes\GLconversions.cpp">
