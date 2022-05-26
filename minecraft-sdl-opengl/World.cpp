@@ -43,10 +43,6 @@ void World::GeneratePerlinChunk(ChunkPosition chunkPos, FastNoiseLite& noise)
 			float randomNoise = noise.GetNoise((float)(x + chunkPos.GetX() * CHUNK_SIZE), (float)(z + chunkPos.GetZ() * CHUNK_SIZE));
 			int randomHeight = (randomNoise * TERRAIN_LAND_CEILING / 2) + TERRAIN_LAND_CEILING / 2;
 			
-			if (randomHeight > highestPoint.y - 1) {
-				highestPoint = glm::vec3(CHUNK_SIZE * chunkPos.GetX() + x + 0.5f, randomHeight + 1, CHUNK_SIZE * chunkPos.GetZ() + z + 0.5f);
-			}
-
 			for (int y = 0; y <= randomHeight; y++)
 			{
 				BlockPosition blockPos = BlockPosition(x, y, z);

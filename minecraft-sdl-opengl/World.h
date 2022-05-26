@@ -29,8 +29,6 @@ public:
 	/// <returns></returns>
 	Chunk* getChunkAt(ChunkPosition chunkPos);
 
-	//temporary place for a light required for my course
-	glm::vec3 highestPoint;
 
 private:
 	std::map<ChunkPosition, Chunk*> chunks;
