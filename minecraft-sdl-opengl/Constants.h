@@ -1,6 +1,6 @@
 #pragma once
 
-#define WORLD_SIZE_CHUNKS 5
+#define WORLD_SIZE_CHUNKS 10
 
 //the max height of generated terrain blocks
 #define TERRAIN_LAND_CEILING 100

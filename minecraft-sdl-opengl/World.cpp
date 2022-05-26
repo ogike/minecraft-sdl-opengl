@@ -17,6 +17,7 @@ void World::GenerateTerrain()
 	//GenerateSingleCube( ChunkPosition(0,0) );
 
 	FastNoiseLite noise;
+	noise.SetSeed(time(NULL));
 	noise.SetNoiseType(FastNoiseLite::NoiseType_Perlin);
 
 	for (int x = -WORLD_SIZE_CHUNKS/2; x <= WORLD_SIZE_CHUNKS/2; x++)
