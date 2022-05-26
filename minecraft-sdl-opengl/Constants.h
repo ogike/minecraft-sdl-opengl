@@ -13,3 +13,8 @@
 #define IRON_CHANCE 3
 
 #define TEX_SIZE 1.0f/16
+
+#define PERLIN_FREQ 0.025f
+
+#define WINDOW_WIDTH 1280
+#define WINDOW_HEIGHT 720

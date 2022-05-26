@@ -16,6 +16,7 @@
 #include "Includes/GLDebugMessageCallback.h"
 
 #include "MyApp.h"
+#include "Constants.h"
 
 int main( int argc, char* args[] )
 {
@@ -70,8 +71,8 @@ int main( int argc, char* args[] )
 	win = SDL_CreateWindow( "Hello SDL&OpenGL!",		// az ablak fejléce
 							100,						// az ablak bal-felső sarkának kezdeti X koordinátája
 							100,						// az ablak bal-felső sarkának kezdeti Y koordinátája
-							640,						// ablak szélessége
-							480,						// és magassága
+							WINDOW_WIDTH,				// ablak szélessége
+							WINDOW_HEIGHT,				// és magassága
 							SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);			// megjelenítési tulajdonságok
 
 
