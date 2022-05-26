@@ -111,6 +111,7 @@
     <ClInclude Include="Includes\OGLPack\include\imgui\imgui.h" />
     <ClInclude Include="Includes\OGLPack\include\imgui\imgui_impl_sdl_gl3.h" />
     <ClInclude Include="Includes\OGLPack\include\imgui\imgui_internal.h" />
+    <ClInclude Include="TextureAtlasHandler.hpp" />
     <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>

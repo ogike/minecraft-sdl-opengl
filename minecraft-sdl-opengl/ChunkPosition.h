@@ -7,8 +7,8 @@ class ChunkPosition
 {
 public:
 	ChunkPosition(int x, int z) : _x(x), _z(z) {}
-	int GetX() { return _x; }
-	int GetZ() { return _z; }
+	int GetX() const { return _x; }
+	int GetZ() const { return _z; }
 
 	//for correct use as std::map keys
 	bool operator<(const ChunkPosition& pos) const {

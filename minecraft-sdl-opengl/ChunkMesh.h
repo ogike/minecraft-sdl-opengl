@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include "Block.h"
+#include "TextureAtlasHandler.hpp"
 
 #include "Constants.h"
 
@@ -34,7 +35,7 @@ public:
 	void addFace(glm::vec3 origoPos, 
 		glm::vec3 facePosTopLeft, glm::vec3 facePosTopRight, 
 		glm::vec3 facePosBtmLeft, glm::vec3 facePosBtmRight, 
-		glm::vec3 normal, glm::vec2 texPos);
+		glm::vec3 normal, int texInd);
 
 	/*void addVertex(const Vertex& vertex) {
 		vertices.push_back(vertex);

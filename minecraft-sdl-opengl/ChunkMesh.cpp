@@ -46,15 +46,16 @@ void ChunkMesh::initBuffers()
 	inited = true;
 }
 
-void ChunkMesh::addFace(glm::vec3 origoPos, glm::vec3 facePosBtmLeft, glm::vec3 facePosBtmRight, glm::vec3 facePosTopLeft, glm::vec3 facePosTopRight, glm::vec3 normal, glm::vec2 texPos)
+void ChunkMesh::addFace(glm::vec3 origoPos, glm::vec3 facePosBtmLeft, glm::vec3 facePosBtmRight, glm::vec3 facePosTopLeft, glm::vec3 facePosTopRight, glm::vec3 normal, int texInd)
 {
 	int startingInd = vertices.size();
+	glm::vec2 texTopLeft = getTexPos(texInd); //TODO: only pass ind and corner (int 1-4) to VAO
 
 	//struct Vertex{ glm::vec3 position; glm::vec3 normals; glm::vec2 texture; };
-	vertices.push_back({ origoPos + facePosBtmLeft, normal, glm::vec2(texPos.x, texPos.y - TEX_SIZE) });
-	vertices.push_back({ origoPos + facePosBtmRight, normal, glm::vec2(texPos.x + TEX_SIZE, texPos.y - TEX_SIZE) });
-	vertices.push_back({ origoPos + facePosTopLeft, normal, texPos });
-	vertices.push_back({ origoPos + facePosTopRight, normal, glm::vec2(texPos.x + TEX_SIZE, texPos.y) });
+	vertices.push_back({ origoPos + facePosBtmLeft, normal, glm::vec2(texTopLeft.x, texTopLeft.y - TEX_SIZE) });
+	vertices.push_back({ origoPos + facePosBtmRight, normal, glm::vec2(texTopLeft.x + TEX_SIZE, texTopLeft.y - TEX_SIZE) });
+	vertices.push_back({ origoPos + facePosTopLeft, normal, texTopLeft });
+	vertices.push_back({ origoPos + facePosTopRight, normal, glm::vec2(texTopLeft.x + TEX_SIZE, texTopLeft.y) });
 
 	// upper triangle
 	indices.push_back( startingInd + 0 );

@@ -64,7 +64,8 @@ void World::GeneratePerlinChunk(ChunkPosition chunkPos, FastNoiseLite& noise)
 					}
 				}
 
-				newChunk->AddBlock(new Block(blockType, blockPos, chunkPos), blockPos);
+				//newChunk->AddBlock(new Block(blockType, blockPos, chunkPos), blockPos);
+				newChunk->SetBlock(x, y, z, blockType);
 			}
 		}
 	}
@@ -92,7 +93,7 @@ void World::GenerateSolidChunk(ChunkPosition chunkPos)
 				else if (y >= maxHeight-3)	blockType = BlockType::Dirt;
 				else						blockType = BlockType::Stone;
 
-				solidChunk->AddBlock(new Block(blockType, blockPos, chunkPos), blockPos);
+				//solidChunk->AddBlock(new Block(blockType, blockPos, chunkPos), blockPos);
 			}
 		}
 	}
@@ -105,7 +106,7 @@ void World::GenerateSingleCube(ChunkPosition chunkPos)
 	Chunk* solidChunk = new Chunk(chunkPos, this);
 
 	BlockPosition blockPos = BlockPosition(0, 0, 0);
-	solidChunk->AddBlock(new Block(BlockType::Dirt, blockPos, chunkPos), blockPos);
+	solidChunk->SetBlock(0,0,0, BlockType::Grass);
 
 	chunks[chunkPos] = solidChunk;
 }

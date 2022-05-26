@@ -1,6 +1,6 @@
 #include "Block.h"
 
-
+/*
 void Block::AddToMesh(ChunkMesh& mesh, NeighbourCollision colls) const
 {
 	glm::vec3 origPos = blockPos.GetGlobalPos(chunkPos);
@@ -84,7 +84,8 @@ void Block::AddToMesh(ChunkMesh& mesh, NeighbourCollision colls) const
 		);
 	
 }
-
+*/
+/*
 void Block::SetTextures()
 {
 
@@ -121,7 +122,6 @@ void Block::SetTextures()
 			bottomTexPos = getTexPos(6, 3);
 			break;
 	}
-	//topRight = topLeft +
 }
 
 //gives back the top left corner of the tile in the atlas
@@ -129,3 +129,4 @@ glm::vec2 Block::getTexPos(int col, int row)
 {
 	return glm::vec2(col * TEX_SIZE, 1 -  row * TEX_SIZE );
 }
+*/
